@@ -1,0 +1,11 @@
+{
+    "name": "microbloom-api",
+    "version": "1.0.0",
+    "description": "API for AI flashcard generation",
+    "main": "index.js",
+    "scripts": {
+      "dev": "vercel dev",
+      "build": "echo 'No build step needed'"
+    },
+    "dependencies": {}
+  }
