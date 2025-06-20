@@ -1,7 +1,1 @@
-{
-  "functions": {
-    "api/generate-flashcards.js": {
-      "runtime": "@vercel/node"
-    }
-  }
-}
+{}
