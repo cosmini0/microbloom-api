@@ -20,15 +20,17 @@ export default async function handler(req, res) {
         });
       }
   
-      const prompt = `Create exactly ${cardCount} flashcards from this content. Return only valid JSON:
-  
-  {
-    "flashcards": [
-      {"front": "Question", "back": "Answer"}
-    ]
-  }
-  
-  Content: ${content}`;
+      const prompt = `CRITICAL: Generate exactly ${cardCount} flashcards. Count them carefully before responding.
+
+Return this exact JSON format with exactly ${cardCount} items:
+{
+  "flashcards": [
+    {"front": "Question 1", "back": "Answer 1"},
+    {"front": "Question 2", "back": "Answer 2"}
+  ]
+}
+
+Generate exactly ${cardCount} flashcards from: ${content}`;
   
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
