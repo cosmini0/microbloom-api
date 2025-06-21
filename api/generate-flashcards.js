@@ -21,7 +21,6 @@ export default async function handler(req, res) {
       }
   
       const prompt = `CRITICAL: Generate exactly ${cardCount} flashcards. Count them carefully before responding.
-
 Return this exact JSON format with exactly ${cardCount} items:
 {
   "flashcards": [
@@ -29,7 +28,6 @@ Return this exact JSON format with exactly ${cardCount} items:
     {"front": "Question 2", "back": "Answer 2"}
   ]
 }
-
 Generate exactly ${cardCount} flashcards from: ${content}`;
   
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -50,7 +48,17 @@ Generate exactly ${cardCount} flashcards from: ${content}`;
       });
   
       const data = await response.json();
+
+      // DEBUG CODE ADDITION:
+      console.log('OpenAI Response:', data);
+      if (data.error) {
+          console.log('OpenAI Error Details:', data.error);
+          throw new Error(`OpenAI API Error: ${data.error.message || data.error.type || 'Unknown error'}`);
+      }
+
+      // Continue with existing code...
       const aiResponse = data.choices[0].message.content;
+      console.log('AI Response Preview:', aiResponse.substring(0, 200)); // Debug the response
   
       let cleanResponse = aiResponse.trim();
       if (cleanResponse.startsWith('```json')) {
